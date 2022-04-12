@@ -18,6 +18,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
     <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85a0a4282e59b38d112f861ad58d388c&autoload=false&libraries=services,clusterer,drawing"></script> -->
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+	<script>
+		var firebaseConfig = {
+            apiKey: 'AIzaSyBCR8wp6ybGJl17XcDifD9jbwveTKDx_8g',
+            authDomain: 'rtls-694e3.firebaseapp.com',
+            projectId: 'rtls-694e3',
+            storageBucket: 'rtls-694e3.appspot.com',
+            messagingSenderId: '868086717959',
+            appId: '1:868086717959:web:64182e93149ab700c114a2',
+        }
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+	</script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+
 </head>
 
 <body id="linx">
