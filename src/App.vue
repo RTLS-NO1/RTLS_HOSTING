@@ -1,7 +1,9 @@
 <template>
   <v-app>
-    <!-- 컨텐츠 영역 -->
-    123123
+    <!-- 컨텐츠 영역 start -->
+    <button v-on:click="$router.push('/login-rtls')">login</button>
+    <router-view></router-view>
+    <!-- 컨텐츠 영역 end -->
   </v-app>
 </template>
 

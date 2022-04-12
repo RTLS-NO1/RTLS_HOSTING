@@ -4,14 +4,23 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode local",
+    "serveFirebase": "vue-cli-service build & firebase serve",
     "serveDev": "vue-cli-service serve --mode development",
     "serveProd": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@lottiefiles/lottie-player": "^1.1.1",
+    "axios": "^0.20.0",
+    "core-js": "^3.6.5",
+    "es6-promise": "^4.2.8",
+    "lodash": "^4.17.20",
+    "nprogress": "^0.2.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.4.5"
+    "vue-router": "^3.4.5",
+    "vuetify": "^2.2.11",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -22,7 +31,7 @@
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.19.0",
+    "sass": "~1.32.12",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "~2.0.7",
     "vue-template-compiler": "^2.6.11",
