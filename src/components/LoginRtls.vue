@@ -1,17 +1,62 @@
 <template>
-  <div id="firebaseui-auth-container"></div>
+  <div>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+    <textarea
+      class="id-token"
+      v-model="idToken"
+      v-if="idToken != ''"
+    ></textarea>
+    <v-btn v-on:click="logout()" v-if="idToken != ''">logout</v-btn>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'LoginRtls',
   data() {
-    return {}
+    return {
+      idToken: '',
+      uiConfig: null,
+    }
   },
-  methods: {},
-  created() {
-    var ui = new window.firebaseui.auth.AuthUI(window.firebase.auth())
-    ui.start('#firebaseui-auth-container', {
+  methods: {
+    setIdToken(idToken) {
+      this.idToken = idToken
+    },
+    startUi() {
+      window.fireUI.start('#firebaseui-auth-container', this.uiConfig)
+    },
+    logout() {
+      window.firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          alert('로그아웃')
+          window.fireUI.start('#firebaseui-auth-container', this.uiConfig)
+        })
+        .catch(error => {
+          alert('로그아웃 에러:' + error)
+        })
+    },
+  },
+  created() {},
+  mounted() {
+    // 로그인 ui 설정
+    this.uiConfig = {
+      callbacks: {
+        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+          console.log(authResult)
+          console.log('redirectUrl : ' + redirectUrl)
+          return false
+        },
+        signInSuccessUrl: '/',
+        uiShown: function () {
+          // The widget is rendered.
+          // Hide the loader.
+          document.getElementById('loader').style.display = 'none'
+        },
+      },
       signInOptions: [
         {
           provider: window.firebase.auth.PhoneAuthProvider.PROVIDER_ID,
@@ -21,30 +66,46 @@ export default {
             badge: 'bottomleft', //' bottomright' or 'inline' applies to invisible.
           },
           defaultCountry: 'KR', // Set default country to the United Kingdom (+44).
-          // For prefilling the national number, set defaultNationNumber.
-          // This will only be observed if only phone Auth provider is used since
-          // for multiple providers, the NASCAR screen will always render first
-          // with a 'sign in with phone number' button.
-          defaultNationalNumber: '1234567890',
-          // You can also pass the full phone number string instead of the
-          // 'defaultCountry' and 'defaultNationalNumber'. However, in this case,
-          // the first country ID that matches the country code will be used to
-          // populate the country selector. So for countries that share the same
-          // country code, the selected country may not be the expected one.
-          // In that case, pass the 'defaultCountry' instead to ensure the exact
-          // country is selected. The 'defaultCountry' and 'defaultNationaNumber'
-          // will always have higher priority than 'loginHint' which will be ignored
-          // in their favor. In this case, the default country will be 'GB' even
-          // though 'loginHint' specified the country code as '+1'.
-          loginHint: '+11234567890',
+          // defaultNationalNumber: '1234567890',
+          loginHint: '+8201041378670',
         },
       ],
+    }
+
+    // 로그인 상태 변경 이벤트
+    const setIdToken = this.setIdToken
+    const startUi = this.startUi
+    window.firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        user.getIdToken().then(function (idToken) {
+          setIdToken(idToken)
+          // console.log(idToken)
+        })
+
+        console.log(user)
+        user.providerData.forEach(function (profile) {
+          console.log('Sign-in provider: ' + profile.providerId)
+          console.log('	Provider-specific UID: ' + profile.uid)
+          console.log('	Name: ' + profile.displayName)
+          console.log('	Email: ' + profile.email)
+          console.log('	Photo URL: ' + profile.photoURL)
+        })
+        // $('#logoutBtn').show()
+      } else {
+        startUi()
+        setIdToken('')
+        // $('#logoutBtn').hide()
+      }
     })
   },
-  mounted() {},
   computed: {},
   watch: {},
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.id-token {
+  width: 800px;
+  height: 200px;
+}
+</style>

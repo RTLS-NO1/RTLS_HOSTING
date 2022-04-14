@@ -20,6 +20,9 @@
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 	<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
 	<script>
 		var firebaseConfig = {
             apiKey: 'AIzaSyBCR8wp6ybGJl17XcDifD9jbwveTKDx_8g',
@@ -31,11 +34,9 @@
         }
 		// Initialize Firebase
 		firebase.initializeApp(firebaseConfig);
-	</script>
-	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
 
+        var fireUI = new window.firebaseui.auth.AuthUI(window.firebase.auth());
+	</script>
 </head>
 
 <body id="linx">

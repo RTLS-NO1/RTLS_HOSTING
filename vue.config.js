@@ -13,9 +13,9 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        prependData: `
-          @import "@/assets/style/place.scss";
-        `,
+        // prependData: `
+        //   @import "@/assets/style/place.scss";
+        // `,
       },
     },
   },
