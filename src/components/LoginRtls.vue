@@ -67,7 +67,7 @@ export default {
           },
           defaultCountry: 'KR', // Set default country to the United Kingdom (+44).
           // defaultNationalNumber: '1234567890',
-          loginHint: '+8201041378670',
+          loginHint: '+821122223333',
         },
       ],
     }
